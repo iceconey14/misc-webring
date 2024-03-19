@@ -1,60 +1,31 @@
 <!doctype html>
 <html>
 <head>
-  </head>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback" defer></script> 
+</head>
 <body>
 <h1>Join the Webring</h1>
   <P>the only not markdown page...</P>
   <form
   action="https://formspree.io/f/xvoekjje"
   method="POST"
->
+><P></P>
   <label>
     Your email:
     <input type="email" name="email">
   </label>
-  <label>
+ <P></P>
+    <label>
     Your message:
     <textarea name="message"></textarea>
   </label>
-
+<p></p>
   <!-- Cloudflare Turnstile Embed -->
-  <div id="cf-turnstile"></div>
-
+<div class="cf-turnstile" data-sitekey="0x4AAAAAAAVF_512HnL0ONsJ" data-callback="javascriptCallback"></div>
+<P></P>
   <button type="submit">Send</button>
 </form>
 
-<script>
-  // Cloudflare Turnstile Configuration
-  var cfConfig = {
-    token: '0x4AAAAAAAVF_512HnL0ONsJ',
-    email: {
-      required: true,
-      placeholder: 'Enter your email'
-    },
-    submit: {
-      value: 'Sign Up'
-    },
-    onSuccess: function(data) {
-      console.log('yey:', data);
-      // You can submit the form after successful signup if needed
-      document.querySelector('form').submit();
-    },
-    onError: function(error) {
-      console.error('Error signing up:', error);
-    }
-  };
-
-  // Embed Cloudflare Turnstile
-  (function() {
-    var cfScript = document.createElement('script');
-    cfScript.src = 'https://cdn.jsdelivr.net/npm/@cloudflare/turnstile@1.0.0/dist/turnstile.min.js';
-    cfScript.onload = function() {
-      window.cfTurnstile(cfConfig);
-    };
-    document.head.appendChild(cfScript);
-  })();
-</script>
 
 </body>
   
