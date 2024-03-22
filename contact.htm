@@ -1,7 +1,17 @@
 <!doctype html>
 <html>
 <head>
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback" defer></script> 
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+window.onload = function() {
+  var recaptcha = document.forms["myForm"]["g-recaptcha-response"];
+  recaptcha.required = true;
+  recaptcha.oninvalid = function(e) {
+    // do something
+document.write('captcha aint checked...');
+  }
+}
+</script>
 </head>
 <body>
 <h1>Join the Webring</h1>
@@ -18,8 +28,8 @@
     <textarea name="message"></textarea>
   </label>
 <p></p>
-  <!-- Cloudflare Turnstile Embed -->
-<div class="cf-turnstile" data-sitekey="0x4AAAAAAAVF_512HnL0ONsJ" data-callback="javascriptCallback"></div>
+  <!-- replaced with recaptcha, since cloudflare turnstile looked useless -->
+ <div class="g-recaptcha" data-sitekey="6LcZ56ApAAAAAHDz-Fv-b5SjWrV806NAYbTIFjYX"></div>
 <P></P>
   <button type="submit">Send</button>
 </form>
