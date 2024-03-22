@@ -2,53 +2,16 @@
 <html>
 <head>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-<script type="text/javascript">
-		captcha_passed = true;
-		function keyHandler(e, obj, next) {
-			if (window.event) { // IE
-				keynum = e.keyCode;
-			} else if(e.which) { // sane browsers 
-				keynum = e.which;
-			}
-			if (keynum == 0x08 || keynum == 0x09 || (keynum >= 96 && keynum <= 105))
-				return true;
-			keychar = String.fromCharCode(keynum);
-			if (keychar.match(/[0-9A-F]/) == null) {
-				return false;
-			} else {
-				return true;
-			}
-		}
-		function check() {
-			var ids = ["a","b","c","d","e","f"];
-			for (var i = 0; i < 6; i++) {
-				var val = document.getElementById(ids[i]).value;
-				if (val.match(/[0-9a-fA-F][0-9a-fA-F]/) == null) {
-					return false;
-				}
-			}
-			return captcha_passed;
-		}
-		function update() {
-			var ok = check();
-			document.getElementById('submit').disabled = !ok;
-		}
-		function doNext(obj, next) {
-			if (obj.value.length == 2 && next != null) {
-				document.getElementById(next).value = '';
-				document.getElementById(next).focus();
-			}
-			update();
-		}
-		function captcha_ok() {
-			captcha_passed = true;
-			update();
-		}
-		function captcha_expired() {
-			captcha_passed = false;
-			update();
-		}
-	</script>
+<script>
+window.onload = function() {
+  var recaptcha = document.forms["myForm"]["g-recaptcha-response"];
+  recaptcha.required = true;
+  recaptcha.oninvalid = function(e) {
+    // do something
+    alert("plz complete the captcha!");
+  }
+}
+</script>
 </head>
 <body>
 <h1>Join the Webring</h1>
@@ -57,12 +20,12 @@
   action="https://formspree.io/f/mwkgnylp" method="POST"><P></P>
   <label>
     Your email:
-    <input type="email" name="email">
+    <input type="email" name="email" required>
   </label>
  <P></P>
     <label>
     Your message:
-    <textarea name="message"></textarea>
+    <textarea name="message" required></textarea>
   </label>
 <p></p>
   <!-- replaced with recaptcha, since cloudflare turnstile looked useless -->
